@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import FlatIndex from './pages/FlatIndex';
+import FlatShow from './pages/FlatShow';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar bg="light" expand="lg">
+          <Container>
+            <Navbar.Brand href="/">AirbnRio</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/apartamentos">Estadias</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route exact path="/apartamentos" element={<FlatIndex />} />
+          <Route path="/apartamentos/:id" element={<FlatShow />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
